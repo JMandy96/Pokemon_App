@@ -23,7 +23,7 @@ def login():
                 flash(flash_message)
                 return redirect(url_for('get_pokedex_num'))
             else:
-                flash_message = 'a user with that email already exists'
+                flash_message = 'a user with that email already exists, check your password.'
                 flash(flash_message)
                 return render_template('login.html', flash_message=flash)
 
