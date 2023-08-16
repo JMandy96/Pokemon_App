@@ -1,0 +1,35 @@
+{% extends 'base.html '%}
+
+{% block styles %}
+  <link rel="stylesheet" href="../static/styles/login.css">
+{% endblock %}
+
+{% block title %}
+  Login Page
+{% endblock %}
+
+{% block content %}
+    <form method="POST" class="w-25 mx-auto">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address:</label>
+          <input type="email" class="form-control" id="email" name="email">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flash-messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}  
+
+
+{% endblock %}

@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="../static/styles/styles.css">
 {% endblock %}
     {% block content %}
+
+
     <div class = 'form_container'>
     <div class = 'pokeball_img'>
     <form method="POST">
@@ -15,6 +17,15 @@
         <button type="submit" class="btn btn-primary">Search:</button>
     </form>
     </div></div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flash-messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}   
 {% if pokemon_set %}
 <h1> Pokemon Party</h1>
 <table class="table">
@@ -46,11 +57,12 @@
   </table>
   <div class="form_container">
     <div class="grass_img">
+      <div class="grassform">
         <form method="POST">
             <input type="hidden" name="action" value="release">
             <div class="mb-3">
                 <label for="party" class="form-label">Release:</label>
-                <input type="text" class="form-control" id="party" name="partied">
+                <input type="text" class="form-control" id="party" name="partied" style="background-color: blue; color: white">
             </div>
             <button type="submit" class="btn btn-primary">Release</button>
         </form>
@@ -58,10 +70,11 @@
             <input type="hidden" name="action" value="send_to_storage">
             <div class="mb-3">
                 <label for="move_storage" class="form-label">Send to storage:</label>
-                <input type="text" class="form-control" id="move_storage" name="move_to_storage">
+                <input type="text" class="form-control" id="move_storage" name="move_to_storage" style="background-color: blue; color:white">
             </div>
             <button type="submit" class="btn btn-primary">Send to storage</button>
         </form>
+      </div>
     </div>
 </div> 
 {% endif %}
@@ -92,13 +105,14 @@
     </tbody>
 
   </table>
-      <div class="form_container">
+    <div class="form_container">
       <div class="grass_img">
+        <div class="grassform">
           <form method="POST">
               <input type="hidden" name="action" value="remove">
               <div class="mb-3">
                   <label for="storage" class="form-label">Release:</label>
-                  <input type="text" class="form-control" id="storage" name="stored">
+                  <input type="text" class="form-control" id="storage" name="stored" style="background-color: blue; color:white">
               </div>
               <button type="submit" class="btn btn-primary">Release</button>
           </form>
@@ -106,10 +120,11 @@
               <input type="hidden" name="action" value="send_to_party">
               <div class="mb-3">
                   <label for="move_party" class="form-label">Send to Party:</label>
-                  <input type="text" class="form-control" id="move_party" name="move_to_party">
+                  <input type="text" class="form-control" id="move_party" name="move_to_party" style="background-color: blue; color:white">
               </div>
               <button type="submit" class="btn btn-primary">Send to Party</button>
           </form>
+        </div>
       </div>
   </div>
   {% endif %}

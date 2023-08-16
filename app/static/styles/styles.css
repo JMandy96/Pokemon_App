@@ -1,0 +1,43 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.form_container{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pokeball_img{
+    color: white;
+    background-image : url("../images/pokeball.png");
+    background-repeat:no-repeat;
+    width: 400px;
+    height: 425px;
+    padding-left: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grass_img{
+    background-image : url("../images/grass.jpg");
+    width: 100vw;
+    height: 30vh;
+    background-repeat: repeat-x;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grassform{
+    background-color:yellow;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 5px;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 5px blue;
+    border: 1px solid blue;
+}
