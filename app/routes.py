@@ -19,22 +19,22 @@ def login():
     if request.method == 'POST' and form.validate_on_submit():
         email = form.email.data.lower()
         password = form.password.data
-        print('test0')
+        
         if email in REGISTERED_USERS and password == REGISTERED_USERS[email]['password']:
             flash_message = f'welcome back, {REGISTERED_USERS[email]["name"]}!'
             flash(flash_message)
-            print("test1")
+            
             return redirect(url_for('get_pokedex_num'))
 
         elif email not in REGISTERED_USERS:
             flash_message = f"That username does not exist, please sign up:"
             flash(flash_message)
-            print("test2")
+            
             return redirect(url_for('sign_up', flash_message=flash_message))
         elif password != REGISTERED_USERS[email]['password']:
             flash_message = "you have input the wrong password, please try again."
             flash(flash_message)    
-            print("test3")
+            return render_template('login.html', form=form, flash_message=flash_message)
 
 
     else:
