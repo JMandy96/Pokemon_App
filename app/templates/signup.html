@@ -1,0 +1,49 @@
+{% extends 'base.html '%}
+
+{% block styles %}
+  <link rel="stylesheet" href="../static/styles/login.css">
+{% endblock %}
+
+{% block title %}
+  Login Page
+{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flash-messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}   
+<div class="container">
+  <h1>Sign Up</h1>
+  <form method="POST" class="w-50 mx-auto">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+          {{ form.first_name.label(class='form-label') }}
+          {{ form.first_name(class='form-control', placeholder='First Name')}}
+      </div>
+      <div class="mb-3">
+          {{ form.last_name.label(class='form-label') }}
+          {{ form.last_name(class='form-control', placeholder='Last Name')}}
+      </div>
+      <div class="mb-3">
+        {{ form.email.label(class='form-label') }}
+        {{ form.email(class='form-control', placeholder='Email Address')}}
+      </div>
+      <div class="mb-3">
+        {{ form.password.label(class='form-label') }}
+        {{ form.password(class='form-control', placeholder='Password') }}
+      </div>
+      <div class="mb-3">
+          {{ form.confirm_password.label(class='form-label') }}
+          {{ form.confirm_password(class='form-control', placeholder='Confirm Password')}}
+      </div>
+      {{ form.submit_btn(class='btn btn-primary') }}
+  </form>
+</div>
+
+  {% endblock %}
