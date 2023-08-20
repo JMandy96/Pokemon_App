@@ -2,39 +2,38 @@ from flask import request, render_template, redirect, url_for, flash, get_flashe
 import requests
 from app import app
 from .forms import LoginForm, SignupForm, PokedexForm
-
-REGISTERED_USERS = {
-    'test@email' : {
-        'name': 'tester',
-        'password': 'test'
-    }
-}
+from flask_login import current_user, login_user,logout_user, login_required
+from .models import User, db
+from werkzeug.security import check_password_hash
 
 pokemon_collection= []
 storage = []
 @app.route('/', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        flash(f'welcome back, {current_user.first_name}!!', category='success')
+        return redirect(url_for('get_pokedex_num'))
     form = LoginForm(request.form)
     flash_message = None
     if request.method == 'POST' and form.validate_on_submit():
         email = form.email.data.lower()
         password = form.password.data
-        
-        if email in REGISTERED_USERS and password == REGISTERED_USERS[email]['password']:
-            flash_message = f'welcome back, {REGISTERED_USERS[email]["name"]}!'
-            flash(flash_message)
+        #query user object from database
+        queried_user = User.query.filter(User.email == email).first()
+        if queried_user and check_password_hash(queried_user.password, password):
+            login_user(queried_user)
+            flash(f'welcome back, {queried_user.first_name}!!', category='success')
             
-            return redirect(url_for('get_pokedex_num'))
-
-        elif email not in REGISTERED_USERS:
+            return render_template('pokedex.html',current_user=current_user)
+        elif queried_user and not check_password_hash(queried_user.password, password):
+            flash("you have input the wrong password, please try again.",  category='danger')    
+            return render_template('login.html', form=form)
+        else:
             flash_message = f"That username does not exist, please sign up:"
-            flash(flash_message)
+            flash(flash_message, 'primary')
             
-            return redirect(url_for('sign_up', flash_message=flash_message))
-        elif password != REGISTERED_USERS[email]['password']:
-            flash_message = "you have input the wrong password, please try again."
-            flash(flash_message)    
-            return render_template('login.html', form=form, flash_message=flash_message)
+            return redirect(url_for('sign_up'))
+
 
 
     else:
@@ -43,31 +42,45 @@ def login():
 @app.route('/signup', methods = ['GET','POST'])
 def sign_up():
     form = SignupForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        email = form.email.data
-        if email not in REGISTERED_USERS:
-            name = f'{form.first_name.data} {form.last_name.data}'
-            password = form.password.data
-            REGISTERED_USERS[email] = {
-                'name': name,
-                'password': password
-            }
-            flash_message = f'Welcome {REGISTERED_USERS[email]["name"]}!!'
-            flash(flash_message)
-            return redirect(url_for('get_pokedex_num'))
-        elif email in REGISTERED_USERS:
-                flash_message = 'a user with that email already exists, please sign in.'
-                flash(flash_message)
-                return render_template('login.html', form=form, flash_message=flash_message)
 
-        return redirect(url_for('get_pokedex_num'))
+
+    if request.method == 'POST' and form.validate_on_submit():
+        
+        # grabbing our sign up form data
+        email = form.email.data
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        password = form.password.data
+        ## create an instance of the user model
+
+        queried_user = User.query.filter(User.email == email).first()
+        if queried_user is not None:
+            flash('A user with that email already exists, please sign in.', category='danger')
+            return render_template('login.html', form=form)
+
+        new_user = User(first_name, last_name, email, password)
+        ## adds new user to db
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash(f'Welcome {new_user.first_name}, {new_user.last_name}!!', category='primary')
+        return redirect(url_for('get_pokedex_num', flash=flash))
+
+
+        # return redirect(url_for('get_pokedex_num'))
     else:
         return render_template('signup.html', form=form)
+    
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash('You have been logged out.', category='info')
+    return redirect(url_for('login'))
 
 @app.route('/pokedex', methods=['GET','POST'])
+@login_required
 def get_pokedex_num():
     form = PokedexForm()
-    flash_messages = get_flashed_messages()
     if request.method == 'POST':
         action = request.form.get('action')
         number = request.form.get('number')
@@ -80,17 +93,15 @@ def get_pokedex_num():
             pokemon = get_pokemon_info(pokemon_info_data)
             pokemon_collection.extend(pokemon)
             if len(pokemon_collection) >= 6:
-                data = response.json()
-                pokemon_info_data = [data]  
                 pokemon_store = get_pokemon_info(pokemon_info_data)
                 storage.append(pokemon_store)
-            return render_template('pokedex.html', pokemon_set=pokemon_collection, storage = storage, flash_message=flash_messages)
+            return render_template('pokedex.html', pokemon_set=pokemon_collection, storage = storage)
         
         if action == 'release':
             release_pokemon(request.form.get('pokemon_name'))
             return render_template('pokedex.html', form=form, pokemon_set=pokemon_collection, storage = storage)
     
-    return render_template('pokedex.html', form=form, pokemon_set=pokemon_collection, storage = storage, flash_message=flash_messages)
+    return render_template('pokedex.html', form=form, pokemon_set=pokemon_collection, storage = storage)
 
 
 

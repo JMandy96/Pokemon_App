@@ -20,7 +20,54 @@
     justify-content: center;
     align-items: center;
 }
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.nav-list{
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    list-style-type: none;
 
+}
+nav button {
+    background-color: blue;
+    margin: 0 25px;
+    height: 38px;
+    width: 125px;
+    border-radius: 5px;
+}
+nav button a{
+    text-decoration: none;
+    color: white;
+}
+.nav-container {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 75px;
+}
+
+.nav-left {
+    flex: 1;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-center {
+    flex: 2;
+    text-align: center;
+}
+
+.nav-right {
+    flex: 1;
+}
 .grass_img{
     background-image : url("../images/grass.jpg");
     width: 100vw;

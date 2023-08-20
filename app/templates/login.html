@@ -9,6 +9,8 @@
 {% endblock %}
 
 {% block content %}
+
+  {% include "includes/nav.html" %}
     <form method="POST" action='/'class="w-25 mx-auto">
       {{ form.hidden_tag() }}
       <div class="mb-3">
@@ -21,15 +23,6 @@
       </div>
         {{ form.submit_btn(class='btn btn-primary') }}
     </form>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul class="flash-messages">
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}  
 
 
 {% endblock %}

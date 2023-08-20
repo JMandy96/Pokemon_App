@@ -17,8 +17,8 @@ class SignupForm(FlaskForm):
 
 
 class PokedexForm(FlaskForm):
-    number = StringField('Pokemon:')
-    submit_search = SubmitField('Search')
+    pokemon = StringField('Pokemon:')
+    submit = SubmitField('search')
 
 class ReleaseForm(FlaskForm):
     action = StringField()

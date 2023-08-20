@@ -4,8 +4,8 @@
 {% block styles %}
     <link rel="stylesheet" href="../static/styles/styles.css">
 {% endblock %}
-    {% block content %}
-
+{% block content %}
+  {% include "includes/nav.html" %}
 
     <div class = 'form_container'>
     <div class = 'pokeball_img'>
@@ -17,15 +17,7 @@
         <button type="submit" class="btn btn-primary">Search:</button>
     </form>
     </div></div>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul class="flash-messages">
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}   
+  
 {% if pokemon_set %}
 <h1> Pokemon Party</h1>
 <table class="table">

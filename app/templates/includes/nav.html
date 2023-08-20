@@ -1,0 +1,28 @@
+{% block styles %}
+  <link rel="stylesheet" href="../../static/styles/styles.css">
+{% endblock %}
+<nav>
+    <div class="nav-container">
+        <div class="nav-left">
+            <img src="../../static/images/PBall-icon.png" alt="Bootstrap" width="30" height="24">
+        </div>
+        <div class="nav-center">
+            <ul class="nav-list">
+                {% if current_user.is_authenticated %}
+                <li>
+                    <button><a aria-current="page" href="{{ url_for('get_pokedex_num')}}">pokemon list</a></button>
+                </li>
+                <li>
+                    <button><a href="{{ url_for('logout')}}">signout</a></button>
+                </li>
+                {% else %}
+                <li>
+                    <button><a href="{{ url_for('login') }}">Login</a></button>
+                    <button><a href="{{url_for('sign_up')}}">sign-up</a></button>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="nav-right"></div>
+    </div>
+</nav>
