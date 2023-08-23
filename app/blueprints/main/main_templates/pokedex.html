@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %} Pokedex {% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="../static/styles/styles.css">
+{% endblock %}
+{% block content %}
+  {% include "includes/nav.html" %}
+
+    <div class = 'form_container'>
+    <div class = 'pokeball_img'>
+    <form class='catch_release' method="POST" action="{{ url_for('main.catchpokemon', user_id= current_user.id) }}">
+          {{ form.hidden_tag() }}
+          {{form.pokemon.label(class='form-control')}}
+          {{ form.pokemon() }}<br>
+          {{form.action.label(class='form-control')}}
+          {{ form.action() }}<br>
+          {{ form.search() }}
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Release</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </form>
+    </div></div>
+  
+{% if pokemon_set %}
+<h1> Pokemon Party</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">sprite</th>
+        <th scope="col">Pokedex Number</th>
+        <th scope="col">Pokemon Name</th>
+        <th scope="col">Base HP</th>
+        <th scope="col">Base Defense</th>
+        <th scope="col">Base Attack</th>
+        <th scope="col">Abilities</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for pokemon in pokemon_set %}
+            <tr>
+              <td><img src="{{ pokemon.sprite }}" alt="Pokemon Sprite"></td>
+              <td>{{ pokemon.number }}</td>
+              <td>{{ pokemon.name }}</td>
+              <td>{{ pokemon.base_hp }}</td>
+              <td>{{ pokemon.base_defense }}</td>
+              <td>{{ pokemon.base_attack }}</td>
+              <td>{{ pokemon.abilities }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+   
+  </table>
+  <div class="form_container">
+    <div class="grass_img">
+
+    </div>
+</div> 
+{% endif %}
+{% if storage %}
+<table class="table">
+    <h1> Stored pokemon </h1>
+    <thead>
+      <tr>
+        <th scope="col">Pokedex Number</th>
+        <th scope="col">Pokemon Name</th>
+        <th scope="col">Base HP</th>
+        <th scope="col">Base Defense</th>
+        <th scope="col">Base Attack</th>
+        <th scope="col">Ability</th>
+      </tr>
+    </thead>
+    {% for stored in storage %}
+    <tr>
+        <td><img src="{{ stored.sprite }}" alt="Pokemon Sprite"></td>
+        <td>{{ stored.number }}</td>
+        <td>{{ stored.name }}</td>
+        <td>{{ stored.base_hp }}</td>
+        <td>{{ stored.base_defense }}</td>
+        <td>{{ stored.base_attack }}</td>
+        <td>{{ stored.abilities }}</td>
+    </tr>
+{% endfor %}
+    </tbody>
+
+  </table>
+    <div class="form_container">
+      <div class="grass_img">
+      </div>
+  </div>
+  {% endif %}
+
+    {% endblock %}

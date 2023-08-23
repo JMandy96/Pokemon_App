@@ -13,13 +13,22 @@
     color: white;
     background-image : url("../images/pokeball.png");
     background-repeat:no-repeat;
-    width: 400px;
-    height: 425px;
+    width: 600px;
+    height:550px;
     padding-left: 2vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.catch_release{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3vw;
+    margin-top:5vh;
+}
+
 nav {
     display: flex;
     justify-content: center;

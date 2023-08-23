@@ -10,15 +10,17 @@
             <ul class="nav-list">
                 {% if current_user.is_authenticated %}
                 <li>
-                    <button><a aria-current="page" href="{{ url_for('get_pokedex_num')}}">pokemon list</a></button>
+                    <button><a aria-current="page" href="{{ url_for('main.catchpokemon', user_id= current_user.id)}}">pokemon list</a></button>
                 </li>
                 <li>
-                    <button><a href="{{ url_for('logout')}}">signout</a></button>
+                    <button><a href="{{ url_for('auth.logout')}}">signout</a></button>
                 </li>
+                <p class="fw-light">{{ current_user.first_name }}</p>
                 {% else %}
                 <li>
-                    <button><a href="{{ url_for('login') }}">Login</a></button>
-                    <button><a href="{{url_for('sign_up')}}">sign-up</a></button>
+                    <button><a href="{{ url_for('auth.login') }}">Login</a></button>
+                    <button><a href="{{url_for('auth.sign_up')}}">sign-up</a></button>
+                    
                 </li>
                 {% endif %}
             </ul>
