@@ -27,7 +27,10 @@ def catchpokemon(user_id):
             pokemon_info = get_pokemon_info(pokemon_info_data)
             
         if action == 'capture':
-            if len(captured_pokemon_list) < 6:
+            existing_pokemon = next((p for p in captured_pokemon_list if p.name == pokemon_info[0]['pokemon_name']), None)
+            if existing_pokemon:
+                flash(f'You already have {pokemon_info[0]["pokemon_name"]} in your party.')
+            elif len(captured_pokemon_list) < 6:
                     captured_pokemon = Pokemon(
                     sprite=pokemon_info[0]['sprite'],
                     number=pokemon_info[0]['pokedex_number'],

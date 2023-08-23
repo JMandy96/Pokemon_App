@@ -16,6 +16,12 @@
           {{form.action.label(class='form-control')}}
           {{ form.action() }}<br>
           {{ form.search() }}
+                     <div class="form-group">
+                <label for="release_pokemon_name">Release Pokémon Name</label>
+                {{ form.release_pokemon_name.label(class="form-control-label") }}
+                {{ form.release_pokemon_name(class="form-control") }}
+            </div>
+            <button type="submit" class="btn btn-danger">RELEASE</button>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
