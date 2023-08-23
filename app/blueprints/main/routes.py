@@ -68,7 +68,6 @@ def catchpokemon(user_id):
                     base_defense=pokemon_info[0]['base_defense'],
                     base_attack=pokemon_info[0]['base_attack'],
                     abilities=pokemon_info[0]['ability'],
-                    user_id=current_user.id
                 )
                 db.session.add(stored_pokemon)
                 db.session.commit()
