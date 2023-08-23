@@ -108,7 +108,6 @@ def get_pokemon_info(data):
 
 
 def release_pokemon(pokemon_name, captured_pokemon_list, stored_pokemon_list):
-    released_pokemon = None
 
     for captured_pokemon in captured_pokemon_list:
         if captured_pokemon.name == pokemon_name:
