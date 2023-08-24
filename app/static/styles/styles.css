@@ -3,13 +3,70 @@
     margin: 0;
 }
 .card-container{
-    margin-left: 10px;
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
-    gap: 0px 0px; 
-    width: 100vw;
-    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
+.fire-card {
+    background-color: orangered;
+}
+
+.water-card {
+    background-color:dodgerblue;
+}
+
+.grass-card {
+    background-color: green;
+}
+
+.normal-card {
+    background-color: grey;
+}
+.fighting-card{
+    background-color: maroon;
+}
+.flying-card{
+    background-color: plum;
+}
+.poison-card{
+    background-color:blueviolet;
+}
+.ground-card{
+    background-color: tan;
+    color:black;
+}
+.rock-card{
+    background-color:peru;
+}
+.bug-card{
+    background-color: darkolivegreen;
+}
+.ghost-card{
+    background-color: indigo;
+}
+.steel-card{
+    background-color: silver;
+}
+.electric-card{
+    background-color: yellow;
+}
+.psychic-card{
+    background-color: fuchsia;
+}
+.ice-card{
+    background-color:aqua;
+}
+.dragon-card{
+    background-color: purple;
+}
+.dark-card{
+    background-color: darkslategrey;
+}
+.fairy-card{
+    background-color: hotpink;
+}
+
 
 .form_container{
     width: 100vw;

@@ -40,15 +40,16 @@
   
 {% if pokemon_set %}
 <h1> Pokemon Party</h1>
+<div class="card-container">
     {% for pokemon in pokemon_set%}
     <div class="card-container">
-    <div class="card" style="width: 18rem; background-color: {% if pokemon.element == 'fire' %} red {% elif pokemon.element == 'water' %} blue {% elif pokemon.element == 'grass' %}green{% else %}gray{% endif %}; color:white;">
+    <div class="card {{ pokemon.element }}-card" style="width: 18rem; color:white;">
       <img src="{{ pokemon.sprite }}" class="card-img-top" alt="Pokemon Sprite">
       <div class="card-body">
-        <h5 class="card-title">{{ pokemon.number }}:{{ pokemon.name }}</h5>
-        <p class="card-text">{{ pokemon.name }} is a {{pokemon.element}} pokemon.</p>
+        <h5 class="card-title {{pokemon.element}}-card">{{ pokemon.number }}:{{ pokemon.name }}</h5>
+        <p class="card-text {{pokemon.element}}-card"">{{ pokemon.name }} is a {{pokemon.element}} pokemon.</p>
       </div>
-      <ul class="list-group list-group-flush">
+      <ul class="{{ pokemon.element }}-card">
         <li class="list-group-item">BASE HEALTH: {{ pokemon.base_hp }}</li>
         <li class="list-group-item">BASE DEFENSE: {{ pokemon.base_defense }}</li>
         <li class="list-group-item">BASE ATTACK: {{ pokemon.base_attack }}</li>
@@ -62,7 +63,7 @@
     </div>
     </div>
     {% endfor %}
-   
+   </div>
   </table>
   <div class="form_container">
     <div class="grass_img">
@@ -75,6 +76,7 @@
     <h1> Stored pokemon </h1>
     <thead>
       <tr>
+        <th scpoe="col">Sprite</th>
         <th scope="col">Pokedex Number</th>
         <th scope="col">Pokemon Name</th>
         <th scope="col">Type</th>
@@ -86,7 +88,7 @@
       </tr>
     </thead>
     {% for stored in storage %}
-    <tr>
+    <tr >
         <td><img src="{{ stored.sprite }}" alt="Pokemon Sprite"></td>
         <td>{{ stored.number }}</td>
         <td>{{ stored.name }}</td>
