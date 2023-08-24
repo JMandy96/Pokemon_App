@@ -41,7 +41,8 @@
 {% if pokemon_set %}
 <h1> Pokemon Party</h1>
     {% for pokemon in pokemon_set%}
-    <div class="card" style="width: 18rem; background-color:blue; color: white;" >
+    <div class="card-container">
+    <div class="card" style="width: 18rem; background-color: {% if pokemon.element == 'fire' %} red {% elif pokemon.element == 'water' %} blue {% elif pokemon.element == 'grass' %}green{% else %}gray{% endif %}; color:white;">
       <img src="{{ pokemon.sprite }}" class="card-img-top" alt="Pokemon Sprite">
       <div class="card-body">
         <h5 class="card-title">{{ pokemon.number }}:{{ pokemon.name }}</h5>
@@ -59,6 +60,7 @@
         <a href="{{ url_for('main.release_pokemon', user_id=current_user.id, pokemon_name=pokemon.name) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to release this Pokémon?')">Release!</a>
       </div>
     </div>
+    </div>
     {% endfor %}
    
   </table>
@@ -75,10 +77,12 @@
       <tr>
         <th scope="col">Pokedex Number</th>
         <th scope="col">Pokemon Name</th>
+        <th scope="col">Type</th>
         <th scope="col">Base HP</th>
         <th scope="col">Base Defense</th>
         <th scope="col">Base Attack</th>
         <th scope="col">Ability</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     {% for stored in storage %}
@@ -86,10 +90,13 @@
         <td><img src="{{ stored.sprite }}" alt="Pokemon Sprite"></td>
         <td>{{ stored.number }}</td>
         <td>{{ stored.name }}</td>
+        <td>{{stored.element}}</td>
         <td>{{ stored.base_hp }}</td>
         <td>{{ stored.base_defense }}</td>
         <td>{{ stored.base_attack }}</td>
         <td>{{ stored.abilities }}</td>
+        <td><input type="hidden" name="release_pokemon_name" value="{{ stored.name }}">
+        <a href="{{ url_for('main.release_pokemon', user_id=current_user.id, pokemon_name=stored.name) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to release this Pokémon?')">Release!</a></td>
     </tr>
 {% endfor %}
     </tbody>

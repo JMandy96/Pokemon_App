@@ -73,7 +73,7 @@ def catchpokemon(user_id):
                     base_hp=pokemon_info[0]['base_hp'],
                     base_defense=pokemon_info[0]['base_defense'],
                     base_attack=pokemon_info[0]['base_attack'],
-                    abilities=pokemon_info[0]['ability'],
+                    abilities=pokemon_info[0]['ability']
                 )
                 db.session.add(stored_pokemon)
                 db.session.commit()
@@ -118,6 +118,11 @@ def release_pokemon(user_id, pokemon_name):
         if captured_pokemon.name == pokemon_name:
             released_pokemon = captured_pokemon
             break
+
+    for stored_pokemon in stored_pokemon_list:
+         if stored_pokemon.name == pokemon_name:
+            released_pokemon = stored_pokemon
+            break
     
     if released_pokemon:
         db.session.delete(released_pokemon)
@@ -127,7 +132,7 @@ def release_pokemon(user_id, pokemon_name):
             captured_pokemon_list.remove(released_pokemon)
         elif released_pokemon in stored_pokemon_list:
             stored_pokemon_list.remove(released_pokemon)
-        
+
         flash(f'You have released your {released_pokemon.name}.')
 
     return redirect(url_for('main.catchpokemon', user_id=current_user.id))
