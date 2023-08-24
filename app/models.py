@@ -44,16 +44,18 @@ class Pokemon(db.Model):
     sprite= db.Column(db.String, nullable=False)
     number= db.Column(db.String, nullable=False)
     name = db.Column(db.String, nullable=False)
+    element = db.Column(db.String, nullable=False)
     base_hp= db.Column(db.Integer, nullable=False)
     base_defense = db.Column(db.Integer, nullable=False)
     base_attack = db.Column(db.Integer, nullable=False)
     abilities = db.Column(db.String, nullable=False)
 
 
-    def __init__(self,sprite,number,name,base_hp,base_defense,base_attack,abilities):
+    def __init__(self,sprite,number,name,element,base_hp,base_defense,base_attack,abilities):
         self.sprite=sprite
         self.number=number
         self.name= name
+        self.element = element
         self.base_hp = base_hp
         self.base_defense=base_defense
         self.base_attack = base_attack

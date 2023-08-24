@@ -1,6 +1,6 @@
 from . import main
 from app.blueprints.auth import auth
-from flask import render_template, request, flash
+from flask import render_template, request, flash,redirect, url_for
 import requests
 from .forms import PokedexForm
 from flask_login import current_user, login_required
@@ -35,6 +35,7 @@ def catchpokemon(user_id):
                     sprite=pokemon_info[0]['sprite'],
                     number=pokemon_info[0]['pokedex_number'],
                     name=pokemon_info[0]['pokemon_name'],
+                    element=pokemon_info[0]['element'],
                     base_hp=pokemon_info[0]['base_hp'],
                     base_defense=pokemon_info[0]['base_defense'],
                     base_attack=pokemon_info[0]['base_attack'],
@@ -50,6 +51,7 @@ def catchpokemon(user_id):
                     sprite=pokemon_info[0]['sprite'],
                     number=pokemon_info[0]['pokedex_number'],
                     name=pokemon_info[0]['pokemon_name'],
+                    element=pokemon_info[0]['element'],
                     base_hp=pokemon_info[0]['base_hp'],
                     base_defense=pokemon_info[0]['base_defense'],
                     base_attack=pokemon_info[0]['base_attack'],
@@ -67,6 +69,7 @@ def catchpokemon(user_id):
                     sprite=pokemon_info[0]['sprite'],
                     number=pokemon_info[0]['pokedex_number'],
                     name=pokemon_info[0]['pokemon_name'],
+                    element=pokemon_info[0]['element'],
                     base_hp=pokemon_info[0]['base_hp'],
                     base_defense=pokemon_info[0]['base_defense'],
                     base_attack=pokemon_info[0]['base_attack'],
@@ -76,10 +79,6 @@ def catchpokemon(user_id):
                 db.session.commit()
                 stored_pokemon_list.append(stored_pokemon)
                 flash(f'{stored_pokemon.name} has been stored.')
-
-        elif action == 'release':
-            release_pokemon_name = form.release_pokemon_name.data
-            release_pokemon(release_pokemon_name, captured_pokemon_list, stored_pokemon_list)
 
     return render_template(
         'pokedex.html',
@@ -96,9 +95,10 @@ def get_pokemon_info(data):
             'sprite': pokemon["sprites"]["front_shiny"],
             'pokedex_number': pokemon['id'],
             'pokemon_name': pokemon["forms"][0]["name"],
-            'base_hp': pokemon["stats"][1]["base_stat"],
+            'element':pokemon["types"][0]["type"]["name"],
+            'base_hp': pokemon["stats"][0]["base_stat"],
             'base_defense': pokemon["stats"][2]["base_stat"],
-            'base_attack': pokemon["stats"][0]["base_stat"],
+            'base_attack': pokemon["stats"][1]["base_stat"],
             'ability': pokemon["abilities"][0]["ability"]["name"] + ", " + pokemon["abilities"][1]["ability"]["name"]
         }
         pokemon_data.append(pokemon_dict)
@@ -106,8 +106,13 @@ def get_pokemon_info(data):
 
 
 
+@main.route('/release/<int:user_id>/<pokemon_name>', methods=['GET','POST'])
+@login_required
+def release_pokemon(user_id, pokemon_name):
+    captured_pokemon_list = current_user.partied_pokemon.all()
+    stored_pokemon_list = current_user.stored_pokemon.all()
 
-def release_pokemon(pokemon_name, captured_pokemon_list, stored_pokemon_list):
+    released_pokemon = None
 
     for captured_pokemon in captured_pokemon_list:
         if captured_pokemon.name == pokemon_name:
@@ -124,5 +129,5 @@ def release_pokemon(pokemon_name, captured_pokemon_list, stored_pokemon_list):
             stored_pokemon_list.remove(released_pokemon)
         
         flash(f'You have released your {released_pokemon.name}.')
-    else:
-        flash(f'You do not have {pokemon_name} in your collection.')
+
+    return redirect(url_for('main.catchpokemon', user_id=current_user.id))

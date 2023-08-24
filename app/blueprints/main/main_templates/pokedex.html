@@ -40,31 +40,26 @@
   
 {% if pokemon_set %}
 <h1> Pokemon Party</h1>
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">sprite</th>
-        <th scope="col">Pokedex Number</th>
-        <th scope="col">Pokemon Name</th>
-        <th scope="col">Base HP</th>
-        <th scope="col">Base Defense</th>
-        <th scope="col">Base Attack</th>
-        <th scope="col">Abilities</th>
-      </tr>
-    </thead>
-    <tbody>
-        {% for pokemon in pokemon_set %}
-            <tr>
-              <td><img src="{{ pokemon.sprite }}" alt="Pokemon Sprite"></td>
-              <td>{{ pokemon.number }}</td>
-              <td>{{ pokemon.name }}</td>
-              <td>{{ pokemon.base_hp }}</td>
-              <td>{{ pokemon.base_defense }}</td>
-              <td>{{ pokemon.base_attack }}</td>
-              <td>{{ pokemon.abilities }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
+    {% for pokemon in pokemon_set%}
+    <div class="card" style="width: 18rem; background-color:blue; color: white;" >
+      <img src="{{ pokemon.sprite }}" class="card-img-top" alt="Pokemon Sprite">
+      <div class="card-body">
+        <h5 class="card-title">{{ pokemon.number }}:{{ pokemon.name }}</h5>
+        <p class="card-text">{{ pokemon.name }} is a {{pokemon.element}} pokemon.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">BASE HEALTH: {{ pokemon.base_hp }}</li>
+        <li class="list-group-item">BASE DEFENSE: {{ pokemon.base_defense }}</li>
+        <li class="list-group-item">BASE ATTACK: {{ pokemon.base_attack }}</li>
+        <li class="list-group-item">ABILITIES: {{ pokemon.abilities }}</li>
+      </ul>
+      <div class="card-body">
+
+        <input type="hidden" name="release_pokemon_name" value="{{ pokemon.name }}">
+        <a href="{{ url_for('main.release_pokemon', user_id=current_user.id, pokemon_name=pokemon.name) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to release this Pokémon?')">Release!</a>
+      </div>
+    </div>
+    {% endfor %}
    
   </table>
   <div class="form_container">
