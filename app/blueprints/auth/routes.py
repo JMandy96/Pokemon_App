@@ -59,8 +59,10 @@ def sign_up():
         db.session.add(new_user)
         db.session.commit()
 
+        login_user(new_user)
+
         flash(f'Welcome {new_user.first_name}, {new_user.last_name}!!', category='primary')
-        return redirect(url_for('main.catchpokemon', flash=flash, user_id= current_user.id))
+        return redirect(url_for('main.catchpokemon', flash=flash, user_id= new_user.id))
 
 
         # return redirect(url_for('get_pokedex_num'))
