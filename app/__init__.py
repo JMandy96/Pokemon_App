@@ -21,11 +21,11 @@ login_manager.login_message = 'You must login to access that page.'
 #import our blueprints
 from app.blueprints.auth import auth
 from app.blueprints.main import main
-from app.blueprints.api import api
+
 #register our blueprints
 app.register_blueprint(main)
 app.register_blueprint(auth)
-app.register_blueprint(api)
+
 
 
 
