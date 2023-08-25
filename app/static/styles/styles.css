@@ -103,6 +103,7 @@ nav {
     justify-content: center;
     align-items: center;
     padding: 10px;
+    width: 100%;
 }
 .nav-list{
     margin-top: 2vh;
@@ -148,7 +149,7 @@ nav button a{
 }
 .grass_img{
     background-image : url("../images/grass.jpg");
-    width: 100vw;
+    width: 100%;
     height: 30vh;
     background-repeat: repeat-x;
     display: flex;
@@ -156,13 +157,39 @@ nav button a{
     align-items: center;
 }
 
-.grassform{
-    background-color:yellow;
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-bottom: 5px;
-    width: 200px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px 5px blue;
-    border: 1px solid blue;
+
+
+@media (max-width: 768px) {
+    .card-container {
+        justify-content: center;
+    }
+    
+    .card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .form_container,
+    .pokeball_img,
+    .catch_release {
+        margin: 0;
+        padding: 10px;
+    }
+    
+    .nav-container {
+        margin: 0;
+    }
+    
+    .nav-list {
+        flex-direction: column;
+        margin-top: 0;
+    }
+    
+    nav button {
+        margin: 5px 0;
+    }
+    
+    .grass_img {
+        height: 15vh;
+    }
 }

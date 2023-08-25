@@ -43,7 +43,7 @@
 <div class="card-container">
     {% for pokemon in pokemon_set%}
     <div class="card-container">
-    <div class="card {{ pokemon.element }}-card" style="width: 18rem; color:white;">
+    <div class="card {{ pokemon.element }}-card" style="width: 18rem; color:white; flex: 1;">
       <img src="{{ pokemon.sprite }}" class="card-img-top" alt="Pokemon Sprite">
       <div class="card-body">
         <h5 class="card-title {{pokemon.element}}-card">{{ pokemon.number }}:{{ pokemon.name }}</h5>
