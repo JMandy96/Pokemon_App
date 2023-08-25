@@ -18,7 +18,7 @@ itsdangerous==2.1.2
 jedi==0.18.2
 Jinja2==3.1.2
 jupyter_client
-jupyter_core==5.3.1
+jupyter_core
 MarkupSafe==2.1.3
 matplotlib-inline==0.1.6
 nest-asyncio==1.5.6
