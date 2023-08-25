@@ -10,7 +10,7 @@
             <ul class="nav-list">
                 {% if current_user.is_authenticated %}
                 <li>
-                    <a href="{{ url_for('main.catchpokemon', user_id= current_user.id)}} class="nav-button">pokemon list</a>
+                    <a href="{{ url_for('main.catchpokemon', user_id= current_user.id)}}" class="nav-button">pokemon list</a>
                 </li>
                 <li>
                     <a href="{{ url_for('main.all_pokemon') }}" class="nav-button">All Pokemon</a>
