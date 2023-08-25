@@ -78,13 +78,14 @@ body{
     justify-content: center;
     align-items: center;
 }
-.pokeball_img{
+.pokeball_img {
     color: white;
-    background-image : url("../images/pokeball.png");
-    background-repeat:no-repeat;
-    width: 600px;
-    height:550px;
-    padding-left: 2vw;
+    background-image: url("../images/pokeball.png");
+    background-repeat: no-repeat;
+    background-size: contain; 
+    width: 100%; 
+    height: auto; 
+    padding: 10px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,6 +158,9 @@ nav button a{
     align-items: center;
 }
 
+.table-responsive {
+    overflow-x: auto;
+}
 
 
 @media (max-width: 768px) {
@@ -167,6 +171,19 @@ nav button a{
     .card {
         width: 100%;
         margin-bottom: 20px;
+    }
+
+    .pokeball_img {
+        color: white;
+        background-image: url("../images/pokeball.png");
+        background-repeat: no-repeat;
+        background-size: contain; 
+        width: 100%; 
+        height: auto; 
+        padding: 10px; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .form_container,
@@ -191,5 +208,9 @@ nav button a{
     
     .grass_img {
         height: 15vh;
+    }
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 20px;
     }
 }
