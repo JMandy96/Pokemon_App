@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %} All Pokemon {% endblock %}
+
+{% block content %}
+  {% include "includes/nav.html" %}
+
+  <div class="form_container">
+    <h1>All Pokemon</h1>
+    <div class="pokemon-list">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Sprite</th>
+            <th scope="col">Pokedex Number</th>
+            <th scope="col">Pokemon Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Base HP</th>
+            <th scope="col">Base Defense</th>
+            <th scope="col">Base Attack</th>
+            <th scope="col">Ability</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pokemon in pokemon_list %}
+            <tr>
+              <td><img src="{{ pokemon.sprite }}" alt="{{ pokemon.name }} Sprite"></td>
+              <td>{{ pokemon.number }}</td>
+              <td>{{ pokemon.name }}</td>
+              <td>{{ pokemon.element }}</td>
+              <td>{{ pokemon.base_hp }}</td>
+              <td>{{ pokemon.base_defense }}</td>
+              <td>{{ pokemon.base_attack }}</td>
+              <td>{{ pokemon.abilities }}</td>
+              <td>
+                <form method="POST" action="{{ url_for('main.catch_pokemon', user_id=current_user.id) }}">
+                  {{ form.hidden_tag() }}
+                  <input type="hidden" name="pokemon_id" value="{{ pokemon.id }}">
+                  <button type="submit" class="btn btn-primary">Catch</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

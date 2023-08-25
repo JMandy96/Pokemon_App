@@ -3,8 +3,23 @@
     margin: 0;
 }
 
+.nav-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #0056b3;
+}
+
 body{
-    background-color: #43cea2 → #185a9d;
+    background-color: gray;
 }
 .card-container{
     display: flex;
@@ -90,13 +105,16 @@ body{
     justify-content: center;
     align-items: center;
 }
-.catch_release{
+.catch_release {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 3vw;
-    margin-top:5vh;
+    margin: 0; 
 }
 
 nav {

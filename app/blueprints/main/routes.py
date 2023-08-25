@@ -136,3 +136,8 @@ def release_pokemon(user_id, pokemon_name):
         flash(f'You have released your {released_pokemon.name}.')
 
     return redirect(url_for('main.catchpokemon', user_id=current_user.id))
+
+@main.route('/all_pokemon')
+def all_pokemon():
+    pokemon_list = Pokemon.query.all()
+    return render_template('all_pokemon.html', pokemon_list=pokemon_list)
