@@ -3,7 +3,7 @@ from config import Config
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from .models import db, User
-def create_app():
+
     app = Flask(__name__)
     app.config.from_object(Config)
 
@@ -35,4 +35,3 @@ def create_app():
     def load_user(user_id):
         return User.query.get(user_id)
 
-    return app
