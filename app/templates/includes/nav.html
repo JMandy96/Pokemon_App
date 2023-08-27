@@ -10,24 +10,28 @@
             <ul class="nav-list">
                 {% if current_user.is_authenticated %}
                 <li>
-                    <a href="{{ url_for('main.catchpokemon', user_id= current_user.id)}}" class="nav-button">pokemon list</a>
+                    <a href="{{ url_for('main.catchpokemon', user_id= current_user.id)}}" class="nav-button">pokemon</a>
                 </li>
                 <li>
-                    <a href="{{ url_for('main.all_pokemon') }}" class="nav-button">All Pokemon</a>
+                    <a href="{{ url_for('main.all_pokemon') }}" class="nav-button">explore</a>
                 </li>
                 <li>
                     <a href="{{ url_for('auth.logout')}}" class="nav-button">signout</a>
                 </li>
-                <p class="fw-light">{{ current_user.first_name }}</p>
+                <li>
+                    <a href="{{ url_for('main.all_trainers')}}" class="nav-button">trainers</a>
+                </li>
+                
                 {% else %}
                 <li>
-                    <button><a href="{{ url_for('auth.login') }}">Login</a></button>
-                    <button><a href="{{url_for('auth.sign_up')}}">sign-up</a></button>
-                    
+                    <a href="{{ url_for('auth.login') }}" class="nav-button">Login</a>
+                </li>
+                <li>
+                    <a href="{{url_for('auth.sign_up')}}" class="nav-button">sign-up</a>    
                 </li>
                 {% endif %}
             </ul>
         </div>
-        <div class="nav-right"></div>
+        <div class="nav-right"><p class="fw-light">{{ current_user.first_name }}</p></div>
     </div>
 </nav>

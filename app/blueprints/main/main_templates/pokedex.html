@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% block title %} Pokedex {% endblock %}
 
-{% block styles %}
-    <link rel="stylesheet" href="../static/styles/styles.css">
-{% endblock %}
+
 {% block content %}
   {% include "includes/nav.html" %}
 
     <div class = 'form_container'>
+      
     <div class = 'pokeball_img'>
     <form class='catch_release' method="POST" action="{{ url_for('main.catchpokemon', user_id= current_user.id) }}">
           {{ form.hidden_tag() }}
@@ -16,7 +15,7 @@
           {{form.action.label(class='form-control')}}
           {{ form.action() }}<br>
           {{ form.search() }}
-
+    </form>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -39,7 +38,9 @@
     </div></div>
   
 {% if pokemon_set %}
+<div class="center-container">
 <h1> Pokemon Party</h1>
+</div>
 <div class="card-container">
     {% for pokemon in pokemon_set%}
     <div class="card-container">
@@ -72,9 +73,12 @@
 </div> 
 {% endif %}
 {% if storage %}
+<div class="center-container">
+<h1> Stored pokemon </h1>
+</div>
 <div class="table-responsive">
 <table class="table">
-    <h1> Stored pokemon </h1>
+    
     <thead>
       <tr>
         <th scpoe="col">Sprite</th>
@@ -89,7 +93,7 @@
       </tr>
     </thead>
     {% for stored in storage %}
-    <tr >
+    <tr class="{{ stored.element }}-card" style="background-color: red;">
         <td><img src="{{ stored.sprite }}" alt="Pokemon Sprite"></td>
         <td>{{ stored.number }}</td>
         <td>{{ stored.name }}</td>

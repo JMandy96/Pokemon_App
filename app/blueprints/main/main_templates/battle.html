@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Battle Results {% endblock %}
+
+{% block content %}
+    {% include "includes/nav.html" %}
+
+    <h1>Battle Results</h1>
+    <h2>{{ user1.first_name }} vs. {{ user2.first_name }}</h2>
+    
+    {% for pokemon1, pokemon2 in battle_results %}
+    <div class="battle">
+    <div class="team1">
+        <h3>{{ user1.first_name }}'s Pokémon:</h3>
+        <ul>
+            <li><img src="{{ pokemon1.sprite }}" alt="{{ pokemon1.name }}"></li>
+            <li>{{ pokemon1.name }} - Current Health: {{ pokemon1.current_hp }}</li>
+        </ul>
+    </div>
+    <div class="team2">
+        <h3>{{ user2.first_name }}'s Pokémon:</h3>
+        <ul>
+            <li><img src="{{ pokemon2.sprite }}" alt="{{ pokemon2.name }}"></li>
+            <li>{{ pokemon2.name }} - Current Health: {{ pokemon2.current_hp }}</li>
+        </ul>
+    </div>
+</div>
+    {% endfor %}
+{% endblock %}

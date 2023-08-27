@@ -3,9 +3,11 @@
 
 {% block content %}
   {% include "includes/nav.html" %}
-
+  <div class="center-container">
+    <h1>Random pokemon list</h1>
+  </div>
   <div class="form_container">
-    <h1>All Pokemon</h1>
+    
     <div class="pokemon-list">
       <table class="table">
         <thead>
@@ -25,20 +27,21 @@
           {% for pokemon in pokemon_list %}
             <tr>
               <td><img src="{{ pokemon.sprite }}" alt="{{ pokemon.name }} Sprite"></td>
-              <td>{{ pokemon.number }}</td>
-              <td>{{ pokemon.name }}</td>
+              <td>{{ pokemon.pokedex_number }}</td>
+              <td>{{ pokemon.pokemon_name }}</td>
               <td>{{ pokemon.element }}</td>
               <td>{{ pokemon.base_hp }}</td>
               <td>{{ pokemon.base_defense }}</td>
               <td>{{ pokemon.base_attack }}</td>
               <td>{{ pokemon.abilities }}</td>
-              <td>
-                <form method="POST" action="{{ url_for('main.catch_pokemon', user_id=current_user.id) }}">
-                  {{ form.hidden_tag() }}
-                  <input type="hidden" name="pokemon_id" value="{{ pokemon.id }}">
-                  <button type="submit" class="btn btn-primary">Catch</button>
-                </form>
-              </td>
+                <td>
+                    <form method="POST" action="{{ url_for('main.catchpokemon', user_id=current_user.id) }}">
+                      {{ form.hidden_tag() }}
+                      <input type="hidden" name="action" value="capture">
+                      <input type="hidden" name="pokemon" value="{{ pokemon.name }}">
+                      <button type="submit" class="btn btn-primary">Catch</button>
+                    </form>
+                  </td>
             </tr>
           {% endfor %}
         </tbody>

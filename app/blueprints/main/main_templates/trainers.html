@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} All Trainers {% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="../static/styles/styles.css">
+{% endblock %}
+{% block content %}
+    {% include "includes/nav.html" %}
+
+    {%for trainer in trainers%}
+    <div class="center-container">
+        <h3> {{ trainer.first_name }}'s Pokémon:</h3>
+    </div>
+        <div class ="table-responsive">
+        <table class="table">
+        <thead>
+            <tr>
+              <th scpoe="col">Sprite</th>
+              <th scope="col">Pokedex Number</th>
+              <th scope="col">Pokemon Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Base HP</th>
+              <th scope="col">Base Defense</th>
+              <th scope="col">Base Attack</th>
+              <th scope="col">Ability</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pokemon in trainer.partied_pokemon %}
+            <tr >
+                <td><img src="{{ pokemon.sprite }}" alt="Pokemon Sprite"></td>
+                <td>{{ pokemon.number }}</td>
+                <td>{{ pokemon.name }}</td>
+                <td>{{pokemon.element}}</td>
+                <td>{{ pokemon.base_hp }}</td>
+                <td>{{ pokemon.base_defense }}</td>
+                <td>{{ pokemon.base_attack }}</td>
+                <td>{{ pokemon.abilities }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        </div>
+        <div class="battle-button"">
+        <form method="POST" action="{{ url_for('main.battle', user_id1=current_user.id, user_id2=trainer.id) }}">
+            <button type="submit" class="btn btn-primary">Battle</button>
+        </form>
+    </div>
+            {% endfor %}
+
+{% endblock %}

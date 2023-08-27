@@ -41,22 +41,24 @@ class User(db.Model, UserMixin):
 
 class Pokemon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    sprite= db.Column(db.String, nullable=False)
+    sprite= db.Column(db.String)
     number= db.Column(db.String, nullable=False)
     name = db.Column(db.String, nullable=False)
-    element = db.Column(db.String, nullable=False)
+    element = db.Column(db.String)
     base_hp= db.Column(db.Integer, nullable=False)
+    current_hp = db.Column(db.Integer, default=base_hp)
     base_defense = db.Column(db.Integer, nullable=False)
     base_attack = db.Column(db.Integer, nullable=False)
-    abilities = db.Column(db.String, nullable=False)
+    abilities = db.Column(db.String)
 
 
-    def __init__(self,sprite,number,name,element,base_hp,base_defense,base_attack,abilities):
+    def __init__(self,sprite,number,name,element,base_hp,current_hp,base_defense,base_attack,abilities):
         self.sprite=sprite
         self.number=number
         self.name= name
         self.element = element
         self.base_hp = base_hp
+        self.current_hp = current_hp
         self.base_defense=base_defense
         self.base_attack = base_attack
         self.abilities = abilities
