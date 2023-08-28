@@ -11,6 +11,10 @@ body{
     min-height: 100vh;
 }
 
+th{
+    background-color: gray;
+}
+
 .login-signup-container{
     display: flex;
     justify-content: center;
