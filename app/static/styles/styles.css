@@ -38,6 +38,11 @@ body{
     justify-content: space-around;
     margin-bottom: 20px;
 }
+.card-container:hover{
+    position: relative; 
+    top: -10px;
+    transition: 1s;
+}
 .fire-card {
     background-color: orangered !important;
     color: white !important;
