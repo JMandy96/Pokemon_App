@@ -49,11 +49,12 @@ body{
     flex-wrap: wrap;
     justify-content: space-around;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 .card-container:hover{
     position: relative; 
     top: -10px;
-    transition: 1s;
+    transition: 2s;
 }
 .fire-card {
     background-color: orangered !important;
