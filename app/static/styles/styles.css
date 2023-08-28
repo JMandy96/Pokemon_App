@@ -10,6 +10,18 @@ body{
     height: 150vh;
     min-height: 100vh;
 }
+
+.login-signup-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15vh;
+}
+.login-signup{
+    width: 25vw;
+    align-items: center;
+    justify-content: center;
+}
 .battle{
     display: flex;
     flex-direction: column;
@@ -125,7 +137,6 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 .pokeball_img{
     color: white;
@@ -134,6 +145,7 @@ body{
     width: 600px;
     height:550px;
     padding-left: 2vw;
+    padding-top: 2vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -240,6 +252,24 @@ nav {
 }
 
 @media (max-width: 768px) {
+
+    .pokeball_img{
+        color: white;
+        background-image : url("../images/pokeball.png");
+        background-repeat:no-repeat;
+        width: 600px;
+        height:550px;
+        padding-left: 2vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-signup{
+        width: 75vw;
+        align-items: center;
+        justify-content: center;
+    }
     .card-container {
         justify-content: center;
     }
@@ -251,12 +281,6 @@ nav {
     .form_container{
         width: 75%;
     }
-    .form_container,
-    .pokeball_img,
-    .catch_release {
-        margin: 0;
-        padding: 10px;
-    }
     
     .nav-container {
         margin: 0;
@@ -267,11 +291,23 @@ nav {
         margin-top: 0;
     }
     
-    nav button {
-        margin: 5px 0;
+    .nav-button {
+        display: inline-block;
+        padding: 7px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 1vh 1vw;
+        transition: background-color 0.3s ease;
+        vertical-align: top;
+        height: 38px;
+        width: 30vw;
     }
     
     .grass_img {
         height: 15vh;
+        width: 100vw;
     }
 }

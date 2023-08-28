@@ -11,7 +11,8 @@
 {% block content %}
 
   {% include "includes/nav.html" %}
-    <form method="POST" action='/'class="w-25 mx-auto">
+  <div class="login-signup-container">
+    <form method="POST" action='/' class="login-signup">
       {{ form.hidden_tag() }}
       <div class="mb-3">
         {{ form.email.label(class='form-label') }}
@@ -23,6 +24,6 @@
       </div>
         {{ form.submit_btn(class='btn btn-primary') }}
     </form>
-
+  </div>
 
 {% endblock %}
