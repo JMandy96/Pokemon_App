@@ -3,25 +3,56 @@
 
 {% block content %}
     {% include "includes/nav.html" %}
-
+    <div class="center-container">
     <h1>Battle Results</h1>
     <h2>{{ user1.first_name }} vs. {{ user2.first_name }}</h2>
-    
+    </div>
     {% for pokemon1, pokemon2 in battle_results %}
+
     <div class="battle">
     <div class="team1">
-        <h3>{{ user1.first_name }}'s Pokémon:</h3>
-        <ul>
-            <li><img src="{{ pokemon1.sprite }}" alt="{{ pokemon1.name }}"></li>
-            <li>{{ pokemon1.name }} - Current Health: {{ pokemon1.current_hp }}</li>
-        </ul>
-    </div>
+
+        <div class="card-container">
+            <div class="card {{ pokemon1.element }}-card" style="width: 18rem; color:white; flex: 1;">
+              <img src="{{ pokemon1.sprite }}" class="card-img-top" alt="Pokemon Sprite">
+              <div class="card-body">
+                <h5 class="card-title {{pokemon1.element}}-card">{{ pokemon1.number }}:{{ pokemon1.name }}</h5>
+                <p class="card-text {{pokemon1.element}}-card"">{{ pokemon1.name }} is a {{pokemon1.element}} pokemon.</p>
+              </div>
+              <ul class="{{ pokemon1.element }}-card">
+                <li class="list-group-item">HEALTH: {{ pokemon1.current_hp }}/{{ pokemon1.base_hp }}</li>
+                <li class="list-group-item">BASE DEFENSE: {{ pokemon1.base_defense }}</li>
+                <li class="list-group-item">BASE ATTACK: {{ pokemon1.base_attack }}</li>
+                <li class="list-group-item">ABILITIES: {{ pokemon1.abilities }}</li>
+              </ul>
+              <div class="card-body">
+
+              </div>
+            </div>
+            </div>
+
     <div class="team2">
-        <h3>{{ user2.first_name }}'s Pokémon:</h3>
-        <ul>
-            <li><img src="{{ pokemon2.sprite }}" alt="{{ pokemon2.name }}"></li>
-            <li>{{ pokemon2.name }} - Current Health: {{ pokemon2.current_hp }}</li>
-        </ul>
+
+        
+        <div class="card-container">
+            <div class="card {{ pokemon2.element }}-card" style="width: 18rem; color:white; flex: 1;">
+              <img src="{{ pokemon2.sprite }}" class="card-img-top" alt="Pokemon Sprite">
+              <div class="card-body">
+                <h5 class="card-title {{pokemon2.element}}-card">{{ pokemon2.number }}:{{ pokemon2.name }}</h5>
+                <p class="card-text {{pokemon2.element}}-card"">{{ pokemon2.name }} is a {{pokemon2.element}} pokemon.</p>
+              </div>
+              <ul class="{{ pokemon2.element }}-card">
+                <li class="list-group-item">HEALTH: {{ pokemon2.current_hp }}/{{ pokemon2.base_hp }}</li>
+                <li class="list-group-item">BASE DEFENSE: {{ pokemon2.base_defense }}</li>
+                <li class="list-group-item">BASE ATTACK: {{ pokemon2.base_attack }}</li>
+                <li class="list-group-item">ABILITIES: {{ pokemon2.abilities }}</li>
+              </ul>
+              <div class="card-body">
+    
+              </div>
+            </div>
+            </div>
+        
     </div>
 </div>
     {% endfor %}

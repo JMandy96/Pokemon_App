@@ -12,18 +12,21 @@ body{
 }
 .battle{
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 .team1{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 2vw;
 }
 .team2{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 3vw;
 }
 
 .center-container{
@@ -37,31 +40,34 @@ body{
 }
 .fire-card {
     background-color: orangered !important;
-}
-
-table tr.fire-card {
-    background-color: red !important;
+    color: white !important;
 }
 
 .water-card {
     background-color:dodgerblue !important;
+    color: white !important;
 }
 
 .grass-card {
     background-color: green !important;
+    color: white !important;
 }
 
 .normal-card {
     background-color: grey !important;
+    color: white !important;
 }
 .fighting-card{
     background-color: maroon !important;
+    color: white !important;
 }
 .flying-card{
     background-color: plum !important;
+    color: black !important;
 }
 .poison-card{
     background-color:blueviolet !important;
+    color: white !important;
 }
 .ground-card{
     background-color: tan !important;
@@ -69,34 +75,43 @@ table tr.fire-card {
 }
 .rock-card{
     background-color:peru !important;
+    color: white !important;
 }
 .bug-card{
     background-color: darkolivegreen !important;
+    color: white !important;
 }
 .ghost-card{
     background-color: indigo !important;
+    color: white !important;
 }
 .steel-card{
-    background-color: silver;
+    background-color: silver !important;
+    color: black !important;
 }
 .electric-card{
-    background-color: yellow;
-    color: black;
+    background-color: yellow !important;
+    color: black !important;
 }
 .psychic-card{
-    background-color:darkmagenta;
+    background-color:darkmagenta !important;
+    color: white !important;
 }
 .ice-card{
-    background-color:aqua;
+    background-color:aqua !important;
+    color: black !important;
 }
 .dragon-card{
     background-color: purple !important;
+    color: white !important;
 }
 .dark-card{
     background-color: darkslategrey !important;
+    color: white !important;
 }
 .fairy-card{
     background-color: hotpink !important;
+    color: black !important;
 }
 
 

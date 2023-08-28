@@ -28,9 +28,10 @@ def catchpokemon(user_id):
             pokemon_info = get_pokemon_info(pokemon_info_data)
             
         if action == 'capture':
-            existing_pokemon = next((p for p in captured_pokemon_list if p.name == pokemon_info[0]['pokemon_name']), None)
-            if existing_pokemon:
-                flash(f'You already have {pokemon_info[0]["pokemon_name"]} in your party.')
+            existing_pokemon_in_partied = next((p for p in captured_pokemon_list if p.name == pokemon_info[0]['pokemon_name']), None)
+            existing_pokemon_in_stored = next((p for p in stored_pokemon_list if p.name == pokemon_info[0]['pokemon_name']), None)
+            if existing_pokemon_in_partied or existing_pokemon_in_stored:
+                flash(f'You already have a {pokemon_info[0]["pokemon_name"]}.', 'info')
             elif len(captured_pokemon_list) < 6:
                     captured_pokemon = Pokemon(
                     sprite=pokemon_info[0]['sprite'],
@@ -65,7 +66,7 @@ def catchpokemon(user_id):
                 stored_pokemon_list.append(stored_pokemon)
                 db.session.commit()
                 stored_pokemon_list.append(stored_pokemon)
-                flash(f'Your party is full. {stored_pokemon.name} has been sent to storage.')
+                flash(f'Your party is full. {stored_pokemon.name} has been sent to storage.', 'info')
             
         elif action == 'store':
                 stored_pokemon = Pokemon(
@@ -82,7 +83,7 @@ def catchpokemon(user_id):
                 db.session.add(stored_pokemon)
                 db.session.commit()
                 stored_pokemon_list.append(stored_pokemon)
-                flash(f'{stored_pokemon.name} has been stored.')
+                flash(f'{stored_pokemon.name} has been stored.', 'success')
 
     return render_template(
         'pokedex.html',
@@ -143,14 +144,14 @@ def release_pokemon(user_id, pokemon_name):
         elif released_pokemon in stored_pokemon_list:
             stored_pokemon_list.remove(released_pokemon)
 
-        flash(f'You have released your {released_pokemon.name}.')
+        flash(f'You have released your {released_pokemon.name}.', 'info')
 
     return redirect(url_for('main.catchpokemon', user_id=current_user.id))
 
 @main.route('/all_pokemon')
 def all_pokemon():
     form = PokedexForm()
-    url = 'https://pokeapi.co/api/v2/pokemon?limit=151'
+    url = 'https://pokeapi.co/api/v2/pokemon?limit=775'
     response = requests.get(url)
     
     if response.ok:
@@ -195,10 +196,8 @@ def battle(user_id1, user_id2):
     battle_results = []
     
     while user1_pokemon and user2_pokemon:
-
-
-        user1_pokemon[0].current_hp, user2_pokemon[0].current_hp = battle_pokemon(user1, user1_pokemon[0], user2, user2_pokemon[0])
-
+        user1_pokemon[0].current_hp, user2_pokemon[0].current_hp = battle_pokemon(user1_pokemon[0], user2_pokemon[0])
+        
         battle_results.append((user1_pokemon[0], user2_pokemon[0]))
         
         if user1_pokemon[0].current_hp <= 0:
@@ -206,7 +205,6 @@ def battle(user_id1, user_id2):
         
         if user2_pokemon[0].current_hp <= 0:
             user2_pokemon.pop(0)
-
 
     winner = None
 
@@ -217,23 +215,20 @@ def battle(user_id1, user_id2):
         winner = user1
         flash(f"congratulations {current_user.first_name} YOU WON!!", "success")
 
-    
-
     return render_template('battle.html', user1=user1, user2=user2, battle_results=battle_results, winner=winner, flash=flash)
 
-def battle_pokemon(attacker_user, attacker_pokemon, defender_user, defender_pokemon):
+def battle_pokemon(attacker_pokemon, defender_pokemon):
     attacker_current_health = attacker_pokemon.current_hp
     defender_current_health = defender_pokemon.current_hp
     
     while attacker_current_health > 0 and defender_current_health > 0:
         damage_to_defender = max(0, attacker_pokemon.base_attack - defender_pokemon.base_defense)
-        defender_current_health -= damage_to_defender
-        
+        defender_current_health = max(0, defender_current_health - damage_to_defender)
         
         if defender_current_health <= 0:
             break
         
         damage_to_attacker = max(0, defender_pokemon.base_attack - attacker_pokemon.base_defense)
-        attacker_current_health -= damage_to_attacker
+        attacker_current_health = max(0, attacker_current_health - damage_to_attacker)
     
     return attacker_current_health, defender_current_health

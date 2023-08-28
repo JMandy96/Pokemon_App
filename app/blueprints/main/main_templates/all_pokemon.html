@@ -26,20 +26,18 @@
         <tbody>
           {% for pokemon in pokemon_list %}
             <tr>
-              <td><img src="{{ pokemon.sprite }}" alt="{{ pokemon.name }} Sprite"></td>
-              <td>{{ pokemon.pokedex_number }}</td>
-              <td>{{ pokemon.pokemon_name }}</td>
-              <td>{{ pokemon.element }}</td>
-              <td>{{ pokemon.base_hp }}</td>
-              <td>{{ pokemon.base_defense }}</td>
-              <td>{{ pokemon.base_attack }}</td>
-              <td>{{ pokemon.abilities }}</td>
-                <td>
+              <td class="{{ pokemon.element }}-card"><img src="{{ pokemon.sprite }}" alt="{{ pokemon.name }} Sprite"></td>
+              <td class="{{ pokemon.element }}-card">{{ pokemon.pokedex_number }}</td>
+              <td class="{{ pokemon.element }}-card">{{ pokemon.pokemon_name }}</td>
+              <td class="{{ pokemon.element }}-card">{{ pokemon.element }}</td>
+              <td class="{{ pokemon.element }}-card">{{ pokemon.base_hp }}</td>
+              <td class="{{ pokemon.element }}-card">{{ pokemon.base_defense }}</td>
+              <td class="{{ pokemon.element }}-card">{{ pokemon.base_attack }}</td>
+              <td class="{{ pokemon.element }}-card">{{ pokemon.abilities }}</td>
+                <td class="{{ pokemon.element }}-card">
                     <form method="POST" action="{{ url_for('main.catchpokemon', user_id=current_user.id) }}">
                       {{ form.hidden_tag() }}
-                      <input type="hidden" name="action" value="capture">
-                      <input type="hidden" name="pokemon" value="{{ pokemon.name }}">
-                      <button type="submit" class="btn btn-primary">Catch</button>
+                      {{ form.search() }}
                     </form>
                   </td>
             </tr>

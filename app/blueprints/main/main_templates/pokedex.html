@@ -93,16 +93,16 @@
       </tr>
     </thead>
     {% for stored in storage %}
-    <tr class="{{ stored.element }}-card" style="background-color: red;">
-        <td><img src="{{ stored.sprite }}" alt="Pokemon Sprite"></td>
-        <td>{{ stored.number }}</td>
-        <td>{{ stored.name }}</td>
-        <td>{{stored.element}}</td>
-        <td>{{ stored.base_hp }}</td>
-        <td>{{ stored.base_defense }}</td>
-        <td>{{ stored.base_attack }}</td>
-        <td>{{ stored.abilities }}</td>
-        <td><input type="hidden" name="release_pokemon_name" value="{{ stored.name }}">
+    <tr>
+        <td class="{{ stored.element }}-card"><img src="{{ stored.sprite }}" alt="Pokemon Sprite"></td>
+        <td class="{{ stored.element }}-card">{{ stored.number }}</td>
+        <td class="{{ stored.element }}-card">{{ stored.name }}</td>
+        <td class="{{ stored.element }}-card">{{stored.element}}</td>
+        <td class="{{ stored.element }}-card">{{ stored.base_hp }}</td>
+        <td class="{{ stored.element }}-card">{{ stored.base_defense }}</td>
+        <td class="{{ stored.element }}-card">{{ stored.base_attack }}</td>
+        <td class="{{ stored.element }}-card">{{ stored.abilities }}</td>
+        <td class="{{ stored.element }}-card"><input type="hidden" name="release_pokemon_name" value="{{ stored.name }}">
         <a href="{{ url_for('main.release_pokemon', user_id=current_user.id, pokemon_name=stored.name) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to release this Pokémon?')">Release!</a></td>
     </tr>
 {% endfor %}
