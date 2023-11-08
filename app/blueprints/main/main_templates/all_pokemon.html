@@ -20,7 +20,6 @@
             <th scope="col">Base Defense</th>
             <th scope="col">Base Attack</th>
             <th scope="col">Ability</th>
-            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -34,12 +33,6 @@
               <td class="{{ pokemon.element }}-card">{{ pokemon.base_defense }}</td>
               <td class="{{ pokemon.element }}-card">{{ pokemon.base_attack }}</td>
               <td class="{{ pokemon.element }}-card">{{ pokemon.abilities }}</td>
-                <td class="{{ pokemon.element }}-card">
-                    <form method="POST" action="{{ url_for('main.catchpokemon', user_id=current_user.id) }}">
-                      {{ form.hidden_tag() }}
-                      {{ form.search() }}
-                    </form>
-                  </td>
             </tr>
           {% endfor %}
         </tbody>

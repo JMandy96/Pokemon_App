@@ -166,6 +166,7 @@ nav {
     align-items: center;
     padding: 10px;
     width: 100%;
+    background-color: rgba(245,237,51,1);
 }
 .nav-list{
     margin-top: 2vh;
@@ -243,8 +244,16 @@ nav {
     justify-content: center;
     align-items: center;
 }
+table, th, td {
+    box-sizing: border-box;
+}
+th, td{
+    padding: 8px;
+    border: 1px solid #ddd;
+    width: 120px;
+}
 .table{
-    width:75%;
+    width:80%;
 }
 .battle-button{
     display: flex;
